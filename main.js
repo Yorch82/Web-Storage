@@ -32,9 +32,14 @@ function enviarDatos() {
 const pintarUsuarios = () => {
     let data = JSON.parse(localStorage.getItem("user"));
     for (let i = 0; i < data.length; i++) {
-        cont.innerHTML += `<p>${data[i].nombre}
-                              ${data[i].correo}
+        cont.innerHTML += `<p>${data[i].nombre}<br>
+                              ${data[i].correo}<br>
                               ${data[i].texto}
                               </p>`
     }
+}
+
+
+function borrarDatos(){
+    localStorage.clear()
 }
