@@ -1,31 +1,19 @@
 const boton = document.querySelector('button')
 const contenedor = document.getElementById('contenedor')
 const cont = document.getElementById('cont')
-let usuarios = [];
+let mail  = document.getElementById('email');
 
-function pintarEnPantalla () {
-    let nombre = localStorage.getItem('nombre');
-    let correo  = localStorage.getItem('correo');
-    let texto = localStorage.getItem('texto')
-    console.log(`Hola, mi nombre es ${nombre} y mi correo es: ${correo}`)
-    contenedor.innerHTML = `
-                        <h2>${nombre}</h2>
-                        <h2>${correo}</h2>
-                        <p>${texto}</p>
-                        `
-}
-
-function enviarDatos() {    
+function enviarDatos() {  
+    let usuarios =  JSON.parse(localStorage.getItem("user")) || []; 
     let user = {
         nombre: nombre.value,
         correo: correo.value,
         texto: texto.value
     }
     usuarios.push(user)
-    console.log(usuarios)
+    // console.log(usuarios)
     localStorage.setItem("user", JSON.stringify(usuarios));
-    cont.innerHTML = ''     
-    // pintarEnPantalla()  
+    cont.innerHTML = ''    
     pintarUsuarios() 
 }
 
@@ -34,12 +22,33 @@ const pintarUsuarios = () => {
     for (let i = 0; i < data.length; i++) {
         cont.innerHTML += `<p>${data[i].nombre}<br>
                               ${data[i].correo}<br>
-                              ${data[i].texto}
-                              </p>`
+                              ${data[i].texto}<br>
+                              </p>
+                              <button onClick="borrarUsuario('${data[i].correo}')">Borrame</button>`
     }
 }
 
-
 function borrarDatos(){
     localStorage.clear()
+    cont.innerHTML = ""
+}
+
+function borrarUsuario(x){
+    console.log(x)
+    let newArray =[]
+
+    let data = JSON.parse(localStorage.getItem("user"));
+    
+    for (let i = 0; i < data.length; i++) {
+        console.log(data)
+        console.log(data[i].correo)
+        if (x !== data[i].correo ){
+            newArray.push(data[i])
+        }           
+      
+    }   
+    console.log(newArray)
+    localStorage.setItem("user", JSON.stringify(newArray));
+    cont.innerHTML = '' 
+    pintarUsuarios()    
 }
