@@ -23,8 +23,8 @@ const pintarUsuarios = () => {
         cont.innerHTML += `<p>${data[i].nombre}<br>
                               ${data[i].correo}<br>
                               ${data[i].texto}<br>
-                              </p>
-                              <button onClick="borrarUsuario('${data[i].correo}')">Borrame</button>`
+                              </p><br>
+                              <button onClick="borrarUsuario('${data[i].correo}')">Borrame</button><br><br>`
     }
 }
 
